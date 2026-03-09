@@ -1,8 +1,16 @@
 # Taller Calculo Visualizacion Normales
 
-**Nombre del estudiante:** Diego Alberto Romero Olmos
-**Fecha de entrega:** 21 de febrero de 2026  
-**Repositorio:** semana_3_3_calculo_visualizacion_normales
+**Estudiantes:** 
+
+- Joan Sebastian Roberto Puerto
+- Baruj Vladimir Ramírez Escalante
+- Diego Alberto Romero Olmos
+- Maicol Sebastian Olarte Ramirez
+- Jorge Isaac Alandete Díaz
+
+**Fecha de entrega:** 
+
+9 de marzo, 2026
 
 ---
 
