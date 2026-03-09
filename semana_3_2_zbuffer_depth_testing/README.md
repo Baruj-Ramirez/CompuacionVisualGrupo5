@@ -2,11 +2,11 @@
 
 ## Nombres de estudiantes:
 
-Joan Sebastian Roberto Puerto
-Baruj Vladimir Ramírez Escalante
-Diego Alberto Romero Olmos
-Maicol Sebastian Olarte Ramirez
-Jorge Isaac Alandete Díaz
+- Joan Sebastian Roberto Puerto
+- Baruj Vladimir Ramírez Escalante
+- Diego Alberto Romero Olmos
+- Maicol Sebastian Olarte Ramirez
+- Jorge Isaac Alandete Díaz
 
 ## Fecha de entrega
 
@@ -49,7 +49,7 @@ Se desarrolló una escena interactiva en la que varios objetos (cubo, esfera, to
 
 | Render con Z‑buffer | Depth buffer normalizado |
 |---------------------|--------------------------|
-| ![Render con Z‑buffer](./media/render_zbuffer.png) | ![Depth buffer](./media/depth_buffer.png) |
+| ![Render con Z‑buffer](./Media/render_zbuffer.png) | ![Depth buffer](./Media/depth_buffer.png) |
 
 **Descripción**:  
 La imagen izquierda muestra la escena renderizada correctamente con Z‑buffer: el triángulo verde (cercano) tapa al rojo (lejano) y el azul se intercala según su profundidad variable. La imagen derecha es el depth buffer normalizado: las zonas más oscuras corresponden a los píxeles más cercanos (triángulo verde), las claras a los más lejanos (rojo), y el azul muestra una gradación continua.
@@ -58,7 +58,7 @@ La imagen izquierda muestra la escena renderizada correctamente con Z‑buffer: 
 
 | Visualización de profundidad por colores | Comparación Depth Test ON / OFF |
 |------------------------------------------|----------------------------------|
-| ![Visualización de profundidad](./media/Near_Colors_Threejs.gif) | ![Depth test ON/OFF](./media/Oclusion_Threejs.gif) |
+| ![Visualización de profundidad](./Media/Near_Colors_Threejs.gif) | ![Depth test ON/OFF](./Media/Oclusion_Threejs.gif) |
 
 **Descripción**:  
 El primer GIF (izquierda) muestra el sistema de codificación de profundidad implementado mediante un shader personalizado. Los objetos más cercanos a la cámara se representan con tonos cálidos (rojos, naranjas), mientras que los más alejados adoptan tonos fríos (azules, verdes). Esta gradación permite identificar visualmente la distancia relativa de cada objeto en la escena, basándose en el valor normalizado de profundidad entre los planos near y far configurados.
@@ -197,4 +197,4 @@ semana_3_2_zbuffer_depth_testing/
 - [x] Mínimo 2 capturas/GIFs por implementación
 - [x] Commits descriptivos en inglés
 - [x] Repositorio organizado y público
-```
+---
