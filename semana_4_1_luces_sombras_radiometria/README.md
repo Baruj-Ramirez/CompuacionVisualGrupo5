@@ -66,7 +66,7 @@ Las imágenes deben estar en la carpeta `media/` y referenciadas así:
 ### Three.js
 ![Escena Three.js - Luces](media/threejs_luces_1.png)
 ![Controles interactivos Leva](media/threejs_leva_control.png)
-```
+
 
 ---
 
