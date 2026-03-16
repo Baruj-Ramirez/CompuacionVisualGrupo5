@@ -30,28 +30,27 @@ Este repositorio contiene las entregas de talleres y proyectos del curso de Comp
 
 ```
 CompuacionVisualGrupo5/
-└── Semana_03_Pipeline_Grafico/
-    ├── semana_3_1_algoritmos_rasterizacion_basica/
-    │   ├── README.md
-    │   ├── python/
-    │   └── media/
-    │
-    ├── semana_3_2_zbuffer_depth_testing/
-    │   ├── README.md
-    │   ├── Python/
-    │   ├── Threejs/
-    │   └── Media/
-    │
-    ├── Semana_3_3_calculo_visualizacion_normales/
-    │   ├── README.md
-    │   ├── python/
-    │   ├── threejs/
-    │   ├── unity/
-    │   └── media/
-    │
-    └── semana_3_4_etapas_pipeline_programable/
-        ├── threejs/
-        └── unity/
+├── semana_3_1_algoritmos_rasterizacion_basica/
+│   ├── README.md
+│   ├── python/
+│   └── media/
+│
+├── semana_3_2_zbuffer_depth_testing/
+│   ├── README.md
+│   ├── Python/
+│   ├── Threejs/
+│   └── Media/
+│
+├── Semana_3_3_calculo_visualizacion_normales/
+│   ├── README.md
+│   ├── python/
+│   ├── threejs/
+│   ├── unity/
+│   └── media/
+│
+├── semana_3_4_etapas_pipeline_programable/
+│    ├── threejs/
+│    └── unity/
 ```
 
 Cada carpeta de taller sigue el formato: `semana_XX_Y_nombre_taller/`
