@@ -13,7 +13,11 @@
 ### Descripción del tema:
 Implementar y comparar diferentes modelos de reflexión de luz: Lambertiano (difuso), Phong (especular), Blinn-Phong, y fundamentos de PBR (Physically Based Rendering). Comprender las diferencias matemáticas y visuales entre cada modelo.
 
-### Descripción de la implementación: 
+### Descripción de la implementación:
+
+#### Unity:
+
+En unity se generaron 3 shaders con modelos blinn, lambert y phong, de estos shader se generaron materiales los cuales fueron colocados en unas esferas para su comparación. Así mismo se añadió una cuarta esfera con el material estándar lit de Unity, el cual es un modelo PBR.
 
 #### Threejs:
 
@@ -32,7 +36,18 @@ Sobre un material sobre el cual se deciden sus parametros de difucion, especular
 En la aplicacion Processing se crea una esfera mediante el metodo renderSphere() el cual mediante triangulos construye las esfera y asigna un indice de iluminación a cada triangulo que conforma la esfera mediante la ecuacion de Lambert (producto punto entre la normal del triangulo y la direccion de la luz) y aplicando el gradiente de iluminación a cada triangulo multiplicando el indice de iluminación a 255, esto mientras con el metodo rotateY( se hace girar la esfera).
 
 
-### Resultados visuales: 
+### Resultados visuales:
+
+#### Unity:
+
+Muestra de las esferas colocadas en fila en el siguiente orden: PBR, Blinn, Phong y Lambert.
+Nótese que cada material tiene una pecurialidad; lambert refleja poco la luz, generando una superficie mate; blinn y phong se muestran muy similares generando una superficie con aspecto plástico, aunque el material phong aparenta reflejar más luz; por último el PBR tiene sombreado más suave y refleja la luz de forma más realista.
+
+![comparación de distintos materiales generados con distintos shaders aplicados a esferas en una misma escena en unity_spheres.png](media/unity_spheres.png)
+
+Muestra de cambio del material PBR dependiendo de la modificación de distintos valores del metalic map y del smoothness.
+
+![cambio de aspecto material PBR en unity_smooth.gif](media/unity_smooth.gif)
 
 #### Threejs:
 
