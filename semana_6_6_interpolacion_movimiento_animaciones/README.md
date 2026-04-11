@@ -48,19 +48,19 @@ El objetivo del taller es implementar técnicas de interpolación (LERP, SLERP y
 
 | Demostración | GIF |
 |--------------|-----|
-| **Movimiento lineal** – Trayectoria recta con rotación SLERP | ![Lineal Three.js](media/threejs_lineal.gif) |
-| **Movimiento curva Bézier** – Trayectoria curva suave | ![Curva Three.js](media/threejs_Curva.gif) |
-| **Comparación lineal vs curva** | ![Comparación Three.js](media/threejs_Comparacion.gif) |
+| **Movimiento lineal** – Trayectoria recta con rotación SLERP | ![Lineal Three.js](Media/threejs_lineal.gif) |
+| **Movimiento curva Bézier** – Trayectoria curva suave | ![Curva Three.js](Media/threejs_Curva.gif) |
+| **Comparación lineal vs curva** | ![Comparación Three.js](Media/threejs_Comparacion.gif) |
 
 ### Unity
 
 | Demostración | GIF |
 |--------------|-----|
-| **Movimiento lineal** – Con barra de progreso y easing | ![Lineal Unity](media/unity_line.gif) |
-| **Movimiento curva Bézier** – Trayectoria curva con puntos de control | ![Curva Unity](media/unity_curve.gif) |
-| **Comparación lineal vs curva** | ![Comparación Unity](media/unity_compracion.gif) |
+| **Movimiento lineal** – Con barra de progreso y easing | ![Lineal Unity](Media/unity_line.gif) |
+| **Movimiento curva Bézier** – Trayectoria curva con puntos de control | ![Curva Unity](Media/unity_curve.gif) |
+| **Comparación lineal vs curva** | ![Comparación Unity](Media/unity_compracion.gif) |
 
-> **Nota:** Los archivos de imagen se encuentran en la carpeta `media/` del repositorio.
+> **Nota:** Los archivos de imagen se encuentran en la carpeta `Media/` del repositorio.
 
 
 ---
