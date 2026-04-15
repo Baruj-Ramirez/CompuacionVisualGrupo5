@@ -29,6 +29,10 @@ El script `IKSolverCCD` maneja dos aspectos principales:
 
 La interfaz gráfica se construye completamente por código sin prefabs, incluyendo un panel con sliders para iteraciones y velocidad, etiquetas de estado (CONVERGIDO / RESOLVIENDO / FUERA DE ALCANCE), y botones de Reset Pose y Reset Target. Se utiliza `Debug.DrawLine` para visualizar la cadena de articulaciones, la línea entre el efector y el objetivo, y un gizmo de ejes en la posición del efector final.
 
+#### Three.js
+
+Se implementó una escena en la que hay un plano de fondo junto con una serie de eslabones que forman un brazo. en un extremo del brazo hay una esfera arrastrable con el mouse. Esta implementación hace uso de "inverse kinematics" (IK) en tiempo real para su funcionamiento.
+
 ---
 
 ### Resultados visuales
@@ -50,6 +54,16 @@ Demostración del modo manual, donde el usuario mueve el objetivo con teclado y 
 Detalle del panel de control con los sliders de iteraciones, velocidad, el toggle de modo y los botones de reset:
 
 ![alt_text](media/unity_menu_4.png)
+
+#### Three.js:
+
+Muestra del espacio generado con los componentes requeridos del plano y las esferas conectadas que forman un brazo, esfera naranja en la punta para arrastrar la cadena de esferas.
+
+![alt_text](media/threejs_robot_arm.png)
+
+Demostración del funcionamiento del arrastrado y como la cadena de esferas reubica su posicion.
+
+![alt_text](media/threejs_arm.gif)
 
 ---
 
@@ -149,6 +163,60 @@ void RefreshLabels()
 }
 ```
 
+#### Three.js
+
+Fragmento del funcionamiento principal del "brazo" usando FABRIK, propagación del movimiento entre el arreglo de segmentos:
+
+```jsx
+for (let iter = 0; iter < ITERATIONS; iter++) {
+    // Forward pass (tip → base)
+    positions[n - 1].copy(target);
+    for (let i = n - 2; i >= 0; i--) {
+      const r = positions[i + 1].distanceTo(positions[i]);
+      const lambda = lens[i] / r;
+      positions[i].lerpVectors(positions[i + 1], positions[i], lambda);
+    }
+
+    // Backward pass (base → tip)
+    positions[0].copy(origBase);
+    for (let i = 0; i < n - 1; i++) {
+      const r = positions[i].distanceTo(positions[i + 1]);
+      const lambda = lens[i] / r;
+      positions[i + 1].lerpVectors(positions[i], positions[i + 1], lambda);
+    }
+
+    if (positions[n - 1].distanceTo(target) < TOLERANCE) break;
+  }
+```
+
+Funcionamiento del arrastrado de la punta del brazo.
+
+```jsx
+  const onPointerMove = useCallback(
+    (e) => {
+      if (!dragging.current) return;
+      const rect = gl.domElement.getBoundingClientRect();
+      const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const ny = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.current.setFromCamera({ x: nx, y: ny }, camera);
+      if (
+        raycaster.current.ray.intersectPlane(
+          planeRef.current,
+          intersection.current
+        )
+      ) {
+        setTargetPos(
+          new THREE.Vector3(
+            intersection.current.x,
+            intersection.current.y,
+            0
+          )
+        );
+      }
+    },
+    [camera, gl, setTargetPos]
+  );
+```
 ---
 
 ### Aprendizajes y dificultades
@@ -164,3 +232,7 @@ void RefreshLabels()
 - **Construcción de UI por código:** Al igual que en el taller anterior, crear toda la interfaz (Canvas, Sliders, Botones, Labels) sin prefabs requirió manejo detallado del sistema `RectTransform` de Unity. El uso de `ConstantPixelSize` en el `CanvasScaler` garantizó que el panel fuera visible independientemente de la resolución.
 
 - **Visualización con Debug.DrawLine:** El rastro y los gizmos del efector final solo son visibles en la vista de escena durante el modo Play, no en la Game View. Esto fue una limitación para mostrar los resultados directamente en pantalla, y en una versión más completa se reemplazaría por un `LineRenderer`.
+
+#### Three.js
+
+Se logró aplicar cinematica inversa para que un objeto 3D (en este caso un arreglo de esferas formando un brazo), responda a interacciones del usuario, logrando moverse al punto donde el usuario arrastre la esfera conectada a la punta del objeto, las posiciones conectadas de los eslabones se ajustan automaticamente usando FABRIK.
