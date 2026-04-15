@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0b0d13;
+  --surface: rgba(11, 13, 20, 0.88);
+  --border:  rgba(255, 255, 255, 0.07);
+  --text:    rgba(255, 255, 255, 0.55);
+  --text-hi: rgba(255, 255, 255, 0.9);
+  --mono:    'Share Tech Mono', monospace;
+  --sans:    'Barlow', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-hi);
+  font-family: var(--mono);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.app canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── HUD superior ─────────────────────────────────────── */
+.hud {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: linear-gradient(to bottom, rgba(11,13,20,0.9), transparent);
+  pointer-events: none;
+}
+
+.hud__left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hud__title {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--text-hi);
+}
+
+.hud__sub {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text);
+}
+
+.hud__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--c, #4ade80);
+}
+
+.hud__dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--c, #4ade80);
+  box-shadow: 0 0 8px var(--c, #4ade80);
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── Panel de info — izquierda ────────────────────────── */
+.info-panel {
+  position: absolute;
+  bottom: 24px; left: 24px;
+  z-index: 10;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  backdrop-filter: blur(14px);
+  min-width: 240px;
+}
+
+.info-panel__section {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.2);
+  margin: 6px 0 8px;
+}
+
+.info-panel__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  padding: 3px 0;
+  color: var(--text);
+  gap: 16px;
+}
+
+.info-panel__row--hi {
+  color: var(--c, #fff);
+}
+
+.info-panel__div {
+  height: 1px;
+  background: var(--border);
+  margin: 10px 0;
+}
+
+/* ── Controles — derecha ──────────────────────────────── */
+.controls {
+  position: absolute;
+  bottom: 24px; right: 24px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.controls__hint {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.18);
+  text-align: right;
+  margin-bottom: 2px;
+}
+
+/* ── Botón de animación ───────────────────────────────── */
+.anim-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  color: var(--text);
+  font-family: var(--mono);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  min-width: 200px;
+  position: relative;
+  backdrop-filter: blur(14px);
+}
+
+.anim-btn:hover {
+  border-color: rgba(255,255,255,0.18);
+  color: var(--text-hi);
+  background: rgba(255,255,255,0.06);
+}
+
+.anim-btn--active {
+  border-color: var(--c, #4ade80);
+  color: var(--c, #4ade80);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 0 16px -4px var(--c, #4ade80);
+}
+
+.anim-btn__key {
+  font-size: 10px;
+  opacity: 0.35;
+  min-width: 10px;
+}
+
+.anim-btn__icon {
+  font-size: 14px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.anim-btn__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.anim-btn__label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.anim-btn__desc {
+  font-size: 9px;
+  letter-spacing: 1px;
+  opacity: 0.5;
+  font-family: var(--sans);
+  font-weight: 300;
+}
+
+.anim-btn__pip {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--c, #4ade80);
+  box-shadow: 0 0 6px var(--c, #4ade80);
+  animation: blink 1.8s ease-in-out infinite;
+}
