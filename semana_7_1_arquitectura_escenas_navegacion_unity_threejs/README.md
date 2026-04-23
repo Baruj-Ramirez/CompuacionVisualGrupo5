@@ -1,4 +1,4 @@
-# Taller 62 – Arquitectura de Escenas y Navegación (Unity y Three.js)
+# Arquitectura de Escenas y Navegación (Unity y Three.js)
 
 **Integrantes:**  
 - Joan Sebastian Roberto Puerto  
