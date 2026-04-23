@@ -149,6 +149,4 @@ Además se consultó la documentación oficial de `scipy.signal` y `matplotlib.a
 - [x] `.gitignore` configurado (se excluyeron carpetas temporales de Python)
 - [x] Commits descriptivos en inglés (ej.: *Add EEG simulation and bandpass filter*, *Add attention level visualization and BCI condition*)
 - [x] Repositorio público verificado
-- [x] Proyecto individual (sin grupo) con aportes propios
-
 ---
