@@ -154,7 +154,7 @@ Estas consultas ayudaron a resolver problemas específicos de carga, orientació
 
 ---
 
-## Checklist de cumplimiento (Three.js)
+## Checklist de cumplimiento
 
 - [x] Carpeta `semana_7_8_motion_design_interactivo_eventos/threejs/` con código funcional.
 - [x] Modelo GLB cargado + animaciones FBX por separado.
