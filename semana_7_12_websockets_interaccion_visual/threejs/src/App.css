@@ -1,0 +1,523 @@
+/* ─── Reset / base ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── App shell ─────────────────────────────────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: #0a0a16;
+  color: #e5e7eb;
+  font-family: system-ui, 'Segoe UI', sans-serif;
+  font-size: 14px;
+}
+
+/* ─── Top navigation bar ─────────────────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  height: 52px;
+  flex-shrink: 0;
+  background: rgba(8, 8, 20, 0.92);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.22);
+  backdrop-filter: blur(8px);
+  z-index: 20;
+}
+
+.brand {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #a5b4fc;
+  white-space: nowrap;
+}
+
+/* ─── Tab buttons ────────────────────────────────────────────────────────────── */
+.tab-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.tab-btn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  white-space: nowrap;
+}
+.tab-btn:hover {
+  background: rgba(99, 102, 241, 0.12);
+  color: #e5e7eb;
+}
+.tab-btn.active {
+  background: rgba(99, 102, 241, 0.22);
+  color: #c7d2fe;
+  border-color: rgba(99, 102, 241, 0.45);
+}
+
+/* ─── WS status badge ────────────────────────────────────────────────────────── */
+.ws-status {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+}
+.ws-url {
+  color: #6b7280;
+  font-size: 11px;
+}
+.ws-connected    { color: #22c55e; border-color: rgba(34,197,94,0.3); }
+.ws-connecting   { color: #eab308; border-color: rgba(234,179,8,0.3); }
+.ws-disconnected { color: #6b7280; }
+.ws-error        { color: #ef4444; border-color: rgba(239,68,68,0.3); }
+
+/* ─── Stage (canvas host) ────────────────────────────────────────────────────── */
+.stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Scene container (shared by both scenes) ───────────────────────────────── */
+.scene-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* ─── Agents scene layout: canvas + side panel ──────────────────────────────── */
+.agents-layout {
+  display: flex;
+}
+
+.agents-canvas {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}
+
+.orbit-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #4b5563;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ─── HUD panel (shared) ─────────────────────────────────────────────────────── */
+.hud {
+  position: absolute;
+  background: rgba(8, 8, 20, 0.88);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 10px;
+  padding: 14px 16px;
+  min-width: 200px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.hud-tr {
+  top: 16px;
+  right: 16px;
+}
+
+.hud-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #a5b4fc;
+  margin-bottom: 2px;
+}
+
+.hud-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.hud-label {
+  width: 40px;
+  color: #6b7280;
+  font-family: ui-monospace, monospace;
+}
+
+.hud-val {
+  font-family: ui-monospace, monospace;
+  color: #d1d5db;
+}
+
+.hud-hint {
+  font-size: 11px;
+  color: #4b5563;
+  margin-top: 4px;
+}
+
+/* Status dot */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Color swatch */
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+/* ─── Signal chart ───────────────────────────────────────────────────────────── */
+.chart-wrap {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 10px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.signal-canvas {
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ─── Agents side panel ──────────────────────────────────────────────────────── */
+.agents-panel {
+  width: 240px;
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto;
+  background: rgba(8, 8, 20, 0.92);
+  border-left: 1px solid rgba(99, 102, 241, 0.18);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #a5b4fc;
+}
+
+.panel-subtitle {
+  font-size: 11px;
+  color: #4b5563;
+  line-height: 1.5;
+  margin-top: -6px;
+  font-family: ui-monospace, monospace;
+}
+
+.agent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ─── Agent card ─────────────────────────────────────────────────────────────── */
+.agent-card {
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-left: 3px solid var(--agent-color, #6366f1);
+}
+
+.agent-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.agent-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.agent-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #e5e7eb;
+}
+
+.agent-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kv {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.kv .k {
+  width: 38px;
+  color: #6b7280;
+  font-family: ui-monospace, monospace;
+}
+
+.kv .v {
+  font-family: ui-monospace, monospace;
+  color: #d1d5db;
+}
+
+.connecting-txt {
+  font-size: 11px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* ─── Panel legend ───────────────────────────────────────────────────────────── */
+.panel-legend {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(99, 102, 241, 0.12);
+  font-size: 11px;
+  color: #4b5563;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.legend-title {
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 2px;
+}
+
+/* ─── Cardiac scene extras ───────────────────────────────────────────────────── */
+.panel-link {
+  color: #6366f1;
+  font-size: 12px;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(99,102,241,0.4);
+  transition: color 0.15s;
+}
+.panel-link:hover { color: #a5b4fc; }
+
+.mode-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+  color: #d1d5db;
+  background: rgba(8,8,20,0.78);
+  border: 1px solid;
+  border-radius: 6px;
+  padding: 4px 10px;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+}
+
+/* ─── Cardiac embedded panel layout ─────────────────────────────────────────── */
+.cardiac-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.cardiac-canvas {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  min-width: 0;
+}
+
+.cardiac-panel {
+  width: 260px;
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto;
+  background: rgba(8, 8, 20, 0.94);
+  border-left: 1px solid rgba(239, 68, 68, 0.18);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cp-section {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+.cp-section:first-of-type { margin-top: 0; }
+
+/* ─ Mode buttons ─ */
+.cp-mode-btns {
+  display: flex;
+  gap: 6px;
+}
+.cp-mode-btn {
+  flex: 1;
+  padding: 6px 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.06);
+  color: #9ca3af;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.cp-mode-btn:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #e5e7eb;
+}
+.cp-mode-btn.active {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: rgba(239, 68, 68, 0.55);
+  color: #fca5a5;
+}
+
+/* ─ Slider rows ─ */
+.cp-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.cp-sl-label {
+  width: 18px;
+  color: #6b7280;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.cp-slider-row input[type=range] {
+  flex: 1;
+  accent-color: #ef4444;
+}
+.cp-sl-val {
+  width: 34px;
+  text-align: right;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  color: #d1d5db;
+  flex-shrink: 0;
+}
+
+/* ─ ECG signal bar ─ */
+.cp-sig-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(239, 68, 68, 0.12);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.cp-sig-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.08s linear;
+}
+
+/* ─ Color swatches ─ */
+.cp-color-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cp-swatch {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background: var(--sw-color);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.12s, border-color 0.12s;
+}
+.cp-swatch:hover {
+  transform: scale(1.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.cp-swatch.active {
+  border-color: #ffffff;
+  transform: scale(1.18);
+  box-shadow: 0 0 8px var(--sw-color);
+}
+
+/* ─ Live data readout ─ */
+.cp-live {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(239, 68, 68, 0.04);
+  border: 1px solid rgba(239, 68, 68, 0.1);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+.cp-kv {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+.cp-k {
+  width: 42px;
+  color: #6b7280;
+  font-family: ui-monospace, monospace;
+  flex-shrink: 0;
+}
+.cp-v {
+  font-family: ui-monospace, monospace;
+  color: #d1d5db;
+}
+.cp-swatch-inline {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+  flex-shrink: 0;
+}
