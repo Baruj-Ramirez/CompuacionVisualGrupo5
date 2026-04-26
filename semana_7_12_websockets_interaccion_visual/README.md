@@ -289,13 +289,13 @@ Los siguientes GIFs muestran el servidor en funcionamiento y la recepción de da
 
 | Vista 1 | Vista 2 |
 |---------|---------|
-| ![Escena básica 1](media/threejs_basic_scene_1.png) | ![Escena básica 2](media/threejs_basic_scene_2.png) |
+| ![Escena básica 1](media/image1.png) | ![Escena básica 2](media/image2.png) |
 
 ### Three.js – Panel de agentes (Pestaña 2)
 
 | Vista 1 | Vista 2 |
 |---------|---------|
-| ![Agentes 1](media/threejs_agents_1.png) | ![Agentes 2](media/threejs_agents_2.png) |
+| ![Agentes 1](media/image3.png) | ![Agentes 2](media/image4.png) |
 
 ---
 
@@ -303,19 +303,19 @@ Los siguientes GIFs muestran el servidor en funcionamiento y la recepción de da
 
 | Vista 1 | Vista 2 |
 |---------|---------|
-| ![ECG Modo Cardíaco 1](media/threejs_cardiac_mode_1.png) | ![ECG Modo Cardíaco 2](media/threejs_cardiac_mode_2.png) |
+| ![ECG Modo Cardíaco 1](media/image5.png) | ![ECG Modo Cardíaco 2](media/image6.png) |
 
 ### Aplicación Cardiograma – Modo manual (control por sliders)
 
 | Vista 1 | Vista 2 |
 |---------|---------|
-| ![ECG Modo Manual 1](media/threejs_cardiac_manual_1.png) | ![ECG Modo Manual 2](media/threejs_cardiac_manual_2.png) |
+| ![ECG Modo Manual 1](media/image7.png) | ![ECG Modo Manual 2](media/image8.png) |
 
 ### Aplicación Cardiograma – Panel de control y paleta de colores
 
 | Panel activo |
 |--------------|
-| ![Panel de control](media/threejs_cardiac_panel.png) |
+| ![Panel de control](media/app_video.gif) |
 
 ---
 
