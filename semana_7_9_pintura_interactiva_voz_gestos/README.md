@@ -218,15 +218,15 @@ demo_lienzo_sintetico()  # genera y muestra el lienzo + lo guarda en media/
 *Lienzo generado sin cámara mostrando los tres tipos de pincel: círculo (rojo), cuadrado (azul), línea (verde) y espiral (amarillo).*
 
 ### 2. Aplicación en ejecución – dibujo con dedo índice
-![Pintura con gesto](media/pintura_gesto_indice.png)
+![Pintura con gesto](media/drawing.gif)
 *El dedo índice extendido detectado por MediaPipe controla la posición del pincel sobre el lienzo en tiempo real.*
 
 ### 3. Cambio de color por voz
-![Cambio de color voz](media/cambio_color_voz.png)
+![Cambio de color voz](media/colors.gif)
 *El HUD muestra `[VOZ] Color: azul` tras reconocer el comando de voz. La mini-paleta inferior resalta el color activo.*
 
 ### 4. Palma abierta – pincel cuadrado
-![Pincel cuadrado palma](media/pincel_cuadrado_palma.png)
+![Pincel cuadrado palma](media/hands.gif)
 *Con la palma abierta (≥ 4 dedos extendidos) el sistema cambia automáticamente al pincel cuadrado.*
 
 ---

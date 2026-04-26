@@ -95,25 +95,24 @@ Se reconstruyen los datos de la Actividad 1 en un `DataFrame` y se:
 
 | Captura 1 | Captura 2 |
 |-----------|-----------|
-| ![Matplotlib RT 1](media/python_matplotlib_rt_1.png) | ![Matplotlib RT 2](media/python_matplotlib_rt_2.gif) |
+| ![Matplotlib RT 1](media/graphic1.PNG) | ![Matplotlib RT 2](media/video1.gif) |
 
 ### Actividad 2 — Barras de conteo (Matplotlib)
-
 | Captura 1 | Captura 2 |
 |-----------|-----------|
-| ![Barras RT 1](media/python_barras_rt_1.png) | ![Barras RT 2](media/python_barras_rt_2.gif) |
+| ![Barras RT 1](media/graphic2.PNG) | ![Barras RT 2](media/video2.gif) |
 
 ### Actividad 3 — Dashboard interactivo (Plotly)
 
 | Captura 1 | Captura 2 |
 |-----------|-----------|
-| ![Plotly RT 1](media/python_plotly_rt_1.png) | ![Plotly RT 2](media/python_plotly_rt_2.png) |
+| ![Plotly RT 1](media/dashboard1.PNG) | ![Plotly RT 2](media/dashboard2.PNG) |
 
 ### Actividad 4 — Subplots múltiples (Matplotlib)
 
 | Captura 1 | Captura 2 |
 |-----------|-----------|
-| ![Subplots RT 1](media/python_subplots_rt_1.png) | ![Subplots RT 2](media/python_subplots_rt_2.gif) |
+| ![Subplots RT 1](media/subplots_multiples.PNG) | ![Subplots RT 2](media/video3.gif) |
 
 ### Bonus — Curva exportada con promedio
 

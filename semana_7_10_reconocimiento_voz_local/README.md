@@ -136,19 +136,19 @@ def _worker_tts(motor):
 > Las capturas y GIFs se encuentran en la carpeta [`media/`](media/).
 
 ### 1. Ventana tkinter – cambio de color por voz
-![Ventana color por voz](media/tkinter_color_voz.gif)
+![Ventana color por voz](media/colors_7_10.gif)
 *La ventana responde a los comandos "rojo", "azul", "verde" y "amarillo" cambiando el color del cuadrado en tiempo real.*
 
 ### 2. Ventana tkinter – rotación del círculo
-![Rotación por voz](media/tkinter_rotacion.gif)
+![Rotación por voz](media/rotate.gif)
 *El círculo naranja orbita al decir "girar" o "iniciar" y se detiene con "detener".*
 
 ### 3. Demostración del diccionario de comandos
-![Diccionario de comandos](media/demo_diccionario_comandos.png)
+![Diccionario de comandos](media/commands_capture.PNG)
 *Salida de la celda 5 del notebook mostrando la interpretación de frases de prueba.*
 
 ### 4. Simulación de mensajes OSC
-![Mensajes OSC](media/demo_osc_mensajes.png)
+![Mensajes OSC](media/final_commands.PNG)
 *Salida de la celda 7 mostrando los mensajes OSC enviados durante la simulación.*
 
 ---
