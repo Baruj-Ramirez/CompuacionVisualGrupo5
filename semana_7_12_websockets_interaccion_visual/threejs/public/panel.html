@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Control · WebSockets Visual</title>
+  <style>
+    /* ── Base ─────────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #08080f;
+      color: #e5e7eb;
+      font-family: system-ui, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 16px 40px;
+      gap: 14px;
+    }
+
+    /* ── Header ───────────────────────────────────────────────────────────── */
+    .page-title { font-size: 22px; font-weight: 700; color: #a5b4fc; }
+    .page-sub   { color: #4b5563; font-size: 12px; font-family: ui-monospace, monospace; }
+
+    /* ── Status bar ───────────────────────────────────────────────────────── */
+    .status-bar {
+      width: 100%; max-width: 480px;
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(99,102,241,0.07);
+      border: 1px solid rgba(99,102,241,0.18);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .status-txt { font-size: 12px; font-family: ui-monospace, monospace; }
+    .status-url { margin-left: auto; color: #374151; font-size: 11px; }
+
+    /* ── Cards ────────────────────────────────────────────────────────────── */
+    .card {
+      width: 100%; max-width: 480px;
+      background: rgba(10,10,22,0.95);
+      border: 1px solid rgba(99,102,241,0.16);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .card-title {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #6b7280;
+      margin-bottom: 14px;
+    }
+
+    /* ── Mode buttons ─────────────────────────────────────────────────────── */
+    .mode-btns { display: flex; gap: 8px; }
+    .mode-btn {
+      flex: 1; padding: 9px 14px;
+      border-radius: 7px; border: 1px solid rgba(99,102,241,0.28);
+      background: transparent; color: #9ca3af;
+      font-size: 13px; cursor: pointer;
+      transition: all 0.18s;
+    }
+    .mode-btn:hover:not(.active) { background: rgba(99,102,241,0.1); color: #e5e7eb; }
+    .mode-btn.active {
+      background: rgba(99,102,241,0.22);
+      color: #c7d2fe;
+      border-color: rgba(99,102,241,0.6);
+    }
+
+    /* ── Slider group ─────────────────────────────────────────────────────── */
+    .slider-group { display: flex; flex-direction: column; gap: 13px; }
+    .slider-row   { display: flex; align-items: center; gap: 10px; }
+    .sl-label     { width: 32px; color: #6b7280; font-family: ui-monospace, monospace; font-size: 13px; }
+
+    input[type="range"] {
+      flex: 1;
+      accent-color: #6366f1;
+      cursor: pointer;
+    }
+    .sl-val {
+      width: 52px; text-align: right;
+      font-family: ui-monospace, monospace; font-size: 13px; color: #d1d5db;
+    }
+
+    /* ── Color grid ───────────────────────────────────────────────────────── */
+    .color-grid { display: flex; flex-wrap: wrap; gap: 9px; }
+    .color-swatch {
+      width: 40px; height: 40px; border-radius: 7px;
+      border: 2px solid transparent; cursor: pointer;
+      transition: transform 0.12s, border-color 0.12s;
+    }
+    .color-swatch:hover { transform: scale(1.08); }
+    .color-swatch.active { border-color: #fff; transform: scale(1.14); }
+
+    /* ── Live data grid ───────────────────────────────────────────────────── */
+    .live-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .live-cell {
+      background: rgba(99,102,241,0.06);
+      border: 1px solid rgba(99,102,241,0.12);
+      border-radius: 7px;
+      padding: 8px 10px;
+    }
+    .live-k { font-size: 10px; color: #6b7280; font-family: ui-monospace, monospace; margin-bottom: 2px; }
+    .live-v { font-size: 16px; font-family: ui-monospace, monospace; color: #d1d5db; }
+
+    /* ── Heartbeat bar ────────────────────────────────────────────────────── */
+    #beat-bar {
+      width: 100%; max-width: 480px;
+      height: 6px;
+      background: linear-gradient(90deg, #ef4444, #f97316);
+      border-radius: 99px;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.08s ease-out;
+      opacity: 0.85;
+    }
+
+    /* ── Section hide ─────────────────────────────────────────────────────── */
+    .hidden { display: none !important; }
+
+    /* ── Footer note ──────────────────────────────────────────────────────── */
+    .footnote {
+      font-size: 11px; color: #374151; text-align: center; max-width: 480px; line-height: 1.6;
+    }
+    .footnote a { color: #6366f1; }
+  </style>
+</head>
+<body>
+
+  <p class="page-title">🎛 Panel de Control Externo</p>
+  <p class="page-sub">Servidor de broadcast · ws://localhost:8766</p>
+
+  <!-- Connection status -->
+  <div class="status-bar">
+    <div class="status-dot" id="dot" style="background:#eab308"></div>
+    <span class="status-txt" id="status-txt">Conectando…</span>
+    <span class="status-url">ws://localhost:8766</span>
+  </div>
+
+  <!-- Heartbeat progress bar -->
+  <div id="beat-bar"></div>
+
+  <!-- Mode selector ──────────────────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-title">Modo de operación</div>
+    <div class="mode-btns">
+      <button class="mode-btn active" id="btn-cardiac" onclick="setMode('cardiac')">💓 Señal Cardíaca</button>
+      <button class="mode-btn"        id="btn-manual"  onclick="setMode('manual')">🎮 Control Manual</button>
+    </div>
+  </div>
+
+  <!-- Cardiac controls (BPM) ─────────────────────────────────────────────── -->
+  <div class="card" id="card-cardiac">
+    <div class="card-title">Frecuencia cardíaca</div>
+    <div class="slider-group">
+      <div class="slider-row">
+        <span class="sl-label">BPM</span>
+        <input type="range" id="sl-bpm" min="30" max="200" value="72" oninput="onBpm(this.value)" />
+        <span class="sl-val" id="val-bpm">72</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manual position controls ───────────────────────────────────────────── -->
+  <div class="card hidden" id="card-manual">
+    <div class="card-title">Posición del objeto en la escena 3D</div>
+    <div class="slider-group">
+      <div class="slider-row">
+        <span class="sl-label">X</span>
+        <input type="range" id="sl-x" min="-5" max="5" step="0.05" value="0" oninput="onPosition()" />
+        <span class="sl-val" id="val-x">0.00</span>
+      </div>
+      <div class="slider-row">
+        <span class="sl-label">Y</span>
+        <input type="range" id="sl-y" min="-5" max="5" step="0.05" value="0" oninput="onPosition()" />
+        <span class="sl-val" id="val-y">0.00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color selector ─────────────────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-title">Color del objeto</div>
+    <div class="color-grid" id="color-grid"></div>
+  </div>
+
+  <!-- Live data readout ──────────────────────────────────────────────────── -->
+  <div class="card">
+    <div class="card-title">Datos en tiempo real ← servidor</div>
+    <div class="live-grid">
+      <div class="live-cell"><div class="live-k">modo</div>  <div class="live-v" id="lv-mode">–</div></div>
+      <div class="live-cell"><div class="live-k">x</div>     <div class="live-v" id="lv-x">–</div></div>
+      <div class="live-cell"><div class="live-k">y</div>     <div class="live-v" id="lv-y">–</div></div>
+      <div class="live-cell"><div class="live-k">señal</div> <div class="live-v" id="lv-sig">–</div></div>
+      <div class="live-cell"><div class="live-k">BPM</div>   <div class="live-v" id="lv-bpm">–</div></div>
+      <div class="live-cell"><div class="live-k">tick</div>  <div class="live-v" id="lv-t">–</div></div>
+    </div>
+  </div>
+
+  <p class="footnote">
+    Este panel se conecta a <code>ws://localhost:8766</code> (servidor de broadcast).<br/>
+    Los cambios se reflejan en tiempo real en la escena 3D:<br/>
+    <a href="/" target="_blank">→ Abrir escena 3D (Tab: Señal Cardíaca &amp; Control)</a>
+  </p>
+
+  <script>
+    // ── State ────────────────────────────────────────────────────────────────
+    let ws           = null;
+    let currentColor = 'red';
+
+    const COLORS = {
+      red:    '#ef4444',
+      green:  '#22c55e',
+      blue:   '#3b82f6',
+      yellow: '#eab308',
+      orange: '#f97316',
+      purple: '#a855f7',
+    };
+
+    // ── WebSocket ────────────────────────────────────────────────────────────
+    function connect() {
+      ws = new WebSocket('ws://localhost:8766');
+
+      ws.onopen = () => {
+        setStatus('connected');
+        // Re-apply current state so server is in sync when reconnecting
+        send({ type: 'set_color', color: currentColor });
+      };
+
+      ws.onclose = () => {
+        setStatus('disconnected');
+        setTimeout(connect, 2500);    // reconnect automatically
+      };
+
+      ws.onerror = () => setStatus('error');
+
+      ws.onmessage = ({ data }) => {
+        try {
+          const d = JSON.parse(data);
+          document.getElementById('lv-mode').textContent = d.mode  ?? '–';
+          document.getElementById('lv-x').textContent    = d.x?.toFixed(3)      ?? '–';
+          document.getElementById('lv-y').textContent    = d.y?.toFixed(3)      ?? '–';
+          document.getElementById('lv-sig').textContent  = d.signal?.toFixed(4) ?? '–';
+          document.getElementById('lv-bpm').textContent  = d.bpm   ?? '–';
+          document.getElementById('lv-t').textContent    = d.t     ?? '–';
+
+          // Animate heartbeat bar on R-peak
+          const sig = d.signal ?? 0;
+          if (sig > 0.8) {
+            const bar = document.getElementById('beat-bar');
+            bar.style.transform = `scaleX(${Math.min(1, sig / 1.5)})`;
+            setTimeout(() => { bar.style.transform = 'scaleX(0)'; }, 120);
+          }
+        } catch { /* ignore */ }
+      };
+    }
+
+    function send(obj) {
+      if (ws?.readyState === WebSocket.OPEN) ws.send(JSON.stringify(obj));
+    }
+
+    function setStatus(s) {
+      const colors = { connected: '#22c55e', disconnected: '#6b7280', error: '#ef4444' };
+      const labels = {
+        connected:    'Conectado',
+        disconnected: 'Desconectado — reconectando…',
+        error:        'Error de conexión',
+      };
+      document.getElementById('dot').style.background   = colors[s] ?? '#eab308';
+      document.getElementById('status-txt').textContent = labels[s] ?? 'Conectando…';
+    }
+
+    // ── Mode ─────────────────────────────────────────────────────────────────
+    function setMode(mode) {
+      ['cardiac', 'manual'].forEach((m) => {
+        document.getElementById(`btn-${m}`).classList.toggle('active', m === mode);
+        document.getElementById(`card-${m}`).classList.toggle('hidden', m !== mode);
+      });
+      send({ type: 'set_mode', mode });
+    }
+
+    // ── Sliders ──────────────────────────────────────────────────────────────
+    function onBpm(val) {
+      document.getElementById('val-bpm').textContent = val;
+      send({ type: 'set_bpm', bpm: parseInt(val, 10) });
+    }
+
+    function onPosition() {
+      const x = parseFloat(document.getElementById('sl-x').value);
+      const y = parseFloat(document.getElementById('sl-y').value);
+      document.getElementById('val-x').textContent = x.toFixed(2);
+      document.getElementById('val-y').textContent = y.toFixed(2);
+      send({ type: 'set_position', x, y });
+    }
+
+    // ── Color swatches ───────────────────────────────────────────────────────
+    function buildColors() {
+      const grid = document.getElementById('color-grid');
+      for (const [name, hex] of Object.entries(COLORS)) {
+        const btn = document.createElement('button');
+        btn.className       = 'color-swatch' + (name === currentColor ? ' active' : '');
+        btn.style.background = hex;
+        btn.title            = name;
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentColor = name;
+          send({ type: 'set_color', color: name });
+        });
+        grid.appendChild(btn);
+      }
+    }
+
+    // ── Bootstrap ────────────────────────────────────────────────────────────
+    buildColors();
+    connect();
+  </script>
+</body>
+</html>
