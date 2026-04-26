@@ -144,11 +144,11 @@ def _worker_tts(motor):
 *El círculo naranja orbita al decir "girar" o "iniciar" y se detiene con "detener".*
 
 ### 3. Demostración del diccionario de comandos
-![Diccionario de comandos](media/commands_capture.png)
+![Diccionario de comandos](media/commands_capture.PNG)
 *Salida de la celda 5 del notebook mostrando la interpretación de frases de prueba.*
 
 ### 4. Simulación de mensajes OSC
-![Mensajes OSC](media/final_commands.png)
+![Mensajes OSC](media/final_commands.PNG)
 *Salida de la celda 7 mostrando los mensajes OSC enviados durante la simulación.*
 
 ---
