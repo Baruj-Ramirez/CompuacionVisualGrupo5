@@ -1,0 +1,16 @@
+{
+  "objects": [
+    { "shape": "Cube",     "x": -4.0, "y": 0, "z":  0.0, "value": 0.80, "category": "A", "label": "alpha"   },
+    { "shape": "Sphere",   "x": -2.5, "y": 0, "z":  1.5, "value": 0.40, "category": "B", "label": "beta"    },
+    { "shape": "Cylinder", "x":  0.0, "y": 0, "z": -1.5, "value": 1.00, "category": "A", "label": "gamma"   },
+    { "shape": "Capsule",  "x":  2.0, "y": 0, "z":  2.0, "value": 0.60, "category": "C", "label": "delta"   },
+    { "shape": "Sphere",   "x":  4.0, "y": 0, "z":  0.0, "value": 0.35, "category": "B", "label": "epsilon" },
+    { "shape": "Cube",     "x": -3.0, "y": 0, "z": -3.0, "value": 0.90, "category": "C", "label": "zeta"    },
+    { "shape": "Cylinder", "x":  1.0, "y": 0, "z": -4.0, "value": 0.70, "category": "A", "label": "eta"     },
+    { "shape": "Capsule",  "x": -1.5, "y": 0, "z":  3.0, "value": 0.25, "category": "B", "label": "theta"   },
+    { "shape": "Sphere",   "x":  3.0, "y": 0, "z":  3.0, "value": 0.85, "category": "C", "label": "iota"    },
+    { "shape": "Cube",     "x":  5.0, "y": 0, "z": -1.0, "value": 0.55, "category": "A", "label": "kappa"   }
+  ],
+  "globalScale":   1.0,
+  "rotationSpeed": 30.0
+}

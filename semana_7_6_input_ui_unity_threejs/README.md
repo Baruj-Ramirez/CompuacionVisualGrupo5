@@ -132,10 +132,13 @@ Función para el cambio de color
     };
 
 
-### Aprendizajes y dificultades
+### Aprendizajes
 
-...
+- Uso de captura de entradas del usuario (teclado y mouse) en Unity mediante Input.GetAxis y lectura de deltas del mouse, demostrando cómo traducir acciones físicas en movimientos y rotaciones dentro de un entorno 3D interactivo.
 
-...
+- Uso de animaciones y máquinas de estado para objetos interactivos (linterna), destacando la transición entre estados.
 
+- Desarrollo de interfaces gráficas (UI) con Canvas en Unity, incluyendo barras de vida y textos dinámicos, evidenciando la importancia de comunicar información del sistema al usuario en tiempo real.
+
+- Mapeo de coordenadas del mouse a posiciones en el espacio 3D en Three.js, demostrando cómo conectar entradas del usuario con transformaciones espaciales en tiempo real.
 ...
