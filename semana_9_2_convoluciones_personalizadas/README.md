@@ -7,7 +7,7 @@
 - Maicol Sebastian Olarte Ramirez  
 - Jorge Isaac Alandete Díaz  
 
-**Fecha de entrega:**  de abril de 2026  
+**Fecha de entrega:** 11 de mayo de 2026  
 
 ---
 
