@@ -1,6 +1,12 @@
 # Taller Analisis Figuras Geometricas
 
-**Nombre del estudiante:** Sebastian  
+**Nombre del estudiante:** 
+- Joan Sebastian Roberto Puerto  
+- Baruj Vladimir Ramírez Escalante  
+- Diego Alberto Romero Olmos  
+- Maicol Sebastian Olarte Ramirez  
+- Jorge Isaac Alandete Díaz  
+  
 **Fecha de entrega:** 11 de mayo de 2026  
 
 ---
