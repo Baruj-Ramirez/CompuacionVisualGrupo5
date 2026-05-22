@@ -145,18 +145,26 @@ Para la ejecucion del codigo se deben tener las librerias de opencv-contrib-pyth
 Estas librerias se descargan en un entorno virtual en python, el paso a paso para la creacion del entorno virtual y la instalacion de las librerias se describe a continuacion:
 
 1. Se verifica la instalacion de python con
+                ``` 
                 python3 --version
+                ```
    Si no esta instalado se instala, en ubunto es:
-
+                ```
                 sudo apt update
                 sudo apt install python3 python3-pip
+                ```
 2. Se crea el entorno viertual
+                ```
                 python3 -m venv entorno_cv
+                ```
 3. Se activa el entorno virtual
+                ```
                 source entorno_cv/bin/activate
-
+                ```
 4. Se instalan las librerias en el entorno virtual
+                ```
                 pip install opencv-python
                 pip install opencv-contrib-python
                 pip install matplotlib
+                ```
 5. Ejecutar el codigo :D
