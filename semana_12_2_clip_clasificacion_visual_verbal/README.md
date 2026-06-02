@@ -45,12 +45,15 @@ El código en Python se puede resumir en 5 módulos principales:
 ## Resultados visuales
 
 ### *Python*
+Anotación de imagenes de muestra de un pajaro y mascotas
+![imagen_Bird_anotada.png](./media/imagen_Bird_anotada.png)
+![imagen_pets_anotada.png](./media/imagen_pets_anotada.png)
 Heatmap de similitud coseno para todas las imágenes y etiquetas 
-![Comparación de imagenes y greducción en clip_results.png](./media/resultados_heatmap.png)
+![resultados_heatmap.png](./media/resultados_heatmap.png)
 Confianza de predicción por imagen en gráfico de barras
-![Comparación de imagenes y greducción en clip_results.png](./media/resultados_resumen.png)
+![resultados_resumen.png](./media/resultados_resumen.png)
 Espacio latente 2D con imágenes (★) y etiquetas (■) proyectadas
-![Comparación de imagenes y greducción en clip_results.png](./media/resultados_embeddings_pca.png)
+![resultados_embeddings_pca.png](./media/resultados_embeddings_pca.png)
 
 ## Código relevante
 
