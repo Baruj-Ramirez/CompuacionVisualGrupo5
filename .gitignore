@@ -405,4 +405,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+#others
+/semana_12_1_clasificacion_asistida_texto_imagen_clip/python/data
+
 # End of https://www.toptal.com/developers/gitignore/api/unity,node,python,jupyternotebooks,processing
