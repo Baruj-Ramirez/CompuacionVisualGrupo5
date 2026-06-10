@@ -19,6 +19,8 @@ public class SlendermanController : MonoBehaviour
     [SerializeField] private float frontDistance = 10f;
     [SerializeField] private float behindTeleportWeight = 0.8f;
     [SerializeField] private float frontTeleportWeight = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float raycastHeight = 20f;
 
     private float timeSinceLastSight;
 
@@ -209,6 +211,23 @@ public class SlendermanController : MonoBehaviour
         if (teleportSound != null) AudioSource.PlayClipAtPoint(teleportSound, transform.position);
 
         Debug.Log("Slenderman teletransportado delante del jugador.");
+    }
+    private bool TryGetGroundPosition(Vector3 position, out Vector3 groundPosition)
+    {
+        Ray ray = new Ray(
+            position + Vector3.up * raycastHeight,
+            Vector3.down);
+
+        if (Physics.Raycast(ray, out RaycastHit hit,
+            raycastHeight * 2f,
+            groundLayer))
+        {
+            groundPosition = hit.point;
+            return true;
+        }
+
+        groundPosition = position;
+        return false;
     }
 
     /// <summary>
