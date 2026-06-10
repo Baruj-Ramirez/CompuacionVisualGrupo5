@@ -188,15 +188,14 @@ public class SlendermanController : MonoBehaviour
         if (player == null) return;
 
         // Posición delante del jugador
-        Vector3 targetPos = player.position + player.forward * frontDistance;
+       Vector3 targetPos = player.position + player.forward * frontDistance;
 
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(targetPos, out hit, 5.0f, NavMesh.AllAreas))
+        if (TryGetGroundPosition(targetPos, out Vector3 groundPos))
         {
-            targetPos = hit.position;
+            targetPos = groundPos;
         }
 
-        targetPos.y += pivotHeightOffset;
+        targetPos.y += pivotHeightOffset+1;
 
         agent.Warp(targetPos);
 

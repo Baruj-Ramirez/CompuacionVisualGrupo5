@@ -5013,7 +5013,7 @@ GameObject:
   - component: {fileID: 1207323057}
   - component: {fileID: 1207323056}
   - component: {fileID: 1207323055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Terrain_(0.00, 0.00, 1000.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6098,9 +6098,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6027780476452466739, guid: 4e6eb759d2f363a41b4ec637da380824, type: 3}
+      propertyPath: m_Radius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027780476452466739, guid: 4e6eb759d2f363a41b4ec637da380824, type: 3}
+      propertyPath: m_Center.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8052352295816399158, guid: 4e6eb759d2f363a41b4ec637da380824, type: 3}
       propertyPath: totalCollectibles
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8052352295816399158, guid: 4e6eb759d2f363a41b4ec637da380824, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 8052352295816399158, guid: 4e6eb759d2f363a41b4ec637da380824, type: 3}
       propertyPath: maxTimeWithoutSeeingPlayer
