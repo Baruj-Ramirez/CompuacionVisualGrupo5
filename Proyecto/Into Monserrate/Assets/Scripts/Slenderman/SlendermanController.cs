@@ -15,6 +15,11 @@ public class SlendermanController : MonoBehaviour
 
     [Header("Teletransporte (cuando pierde al jugador)")]
     [SerializeField] private float maxTimeWithoutSeeingPlayer = 40f;   // 40 segundos (puedes cambiarlo)
+    [SerializeField] private float behindDistance = 2.5f;
+    [SerializeField] private float frontDistance = 10f;
+    [SerializeField] private float behindTeleportWeight = 0.8f;
+    [SerializeField] private float frontTeleportWeight = 0.2f;
+
     private float timeSinceLastSight;
 
     [Header("Detección por línea de visión")]
@@ -26,6 +31,10 @@ public class SlendermanController : MonoBehaviour
     [SerializeField] private AudioClip teleportSound;
 
     private bool playerIsVisible = false;
+    [Header("Recolectables")]
+    [SerializeField] private int totalCollectibles = 5;
+    private int collectedObjects = 0;
+    private float progression = 0f;
 
     void Start()
     {
@@ -79,7 +88,7 @@ public class SlendermanController : MonoBehaviour
             // Si pasa el tiempo máximo sin verlo, teletransportarse detrás de él
             if (timeSinceLastSight >= maxTimeWithoutSeeingPlayer)
             {
-                TeleportBehindPlayer();
+                RandomTeleport();
                 timeSinceLastSight = 0f;   // reiniciar contador tras TP
             }
             else
@@ -126,13 +135,26 @@ public class SlendermanController : MonoBehaviour
     /// </summary>
     [Header("Ajustes de modelo")]
     [SerializeField] private float pivotHeightOffset = 40.0f; // Distancia desde el pivote hasta los pies. Ajústalo.
+    private void RandomTeleport()
+    {
+        float totalWeight = behindTeleportWeight + frontTeleportWeight;
+        float randomValue = Random.Range(0f, totalWeight);
 
+        if (randomValue < behindTeleportWeight)
+        {
+            TeleportBehindPlayer();
+        }
+        else
+        {
+            TeleportInFrontOfPlayer();
+        }
+    }
     private void TeleportBehindPlayer()
     {
         if (player == null) return;
 
         // Posición detrás del jugador, en el plano XZ
-        Vector3 targetPos = player.position - player.forward * 2.5f;
+        Vector3 targetPos = player.position - player.forward * behindDistance;
 
         // Buscar el punto más cercano sobre el NavMesh (eso nos da una altura de suelo)
         NavMeshHit hit;
@@ -159,6 +181,36 @@ public class SlendermanController : MonoBehaviour
         Debug.Log("Slenderman teletransportado con corrección de altura.");
     }
 
+    private void TeleportInFrontOfPlayer()
+    {
+        if (player == null) return;
+
+        // Posición delante del jugador
+        Vector3 targetPos = player.position + player.forward * frontDistance;
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(targetPos, out hit, 5.0f, NavMesh.AllAreas))
+        {
+            targetPos = hit.position;
+        }
+
+        targetPos.y += pivotHeightOffset;
+
+        agent.Warp(targetPos);
+
+        // Mirar al jugador
+        Vector3 lookDir = (player.position - transform.position).normalized;
+        lookDir.y = 0;
+
+        if (lookDir != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(lookDir);
+
+        if (teleportEffect != null) teleportEffect.Play();
+        if (teleportSound != null) AudioSource.PlayClipAtPoint(teleportSound, transform.position);
+
+        Debug.Log("Slenderman teletransportado delante del jugador.");
+    }
+
     /// <summary>
     /// Acción cuando atrapa al jugador. Aquí defines qué pasa (reiniciar nivel, mostrar pantalla de derrota...)
     /// </summary>
@@ -168,6 +220,25 @@ public class SlendermanController : MonoBehaviour
         // Ejemplo: cargar una escena de game over o llamar a un método del GameManager
         // Puedes invocar un evento o buscar un GameManager con FindObjectOfType
         // Time.timeScale = 0f; // pausar el juego (si quieres)
+    }
+
+    public void RegisterCollectedObject()
+    {
+        collectedObjects++;
+
+        progression = Mathf.Clamp01(
+            (float)collectedObjects / totalCollectibles);
+
+        UpdateTeleportWeights();
+
+        Debug.Log($"Progreso: {collectedObjects}/{totalCollectibles}");
+    }
+
+    private void UpdateTeleportWeights()
+    {
+        behindTeleportWeight = Mathf.Lerp(1f, 0.2f, progression);
+        frontTeleportWeight = Mathf.Lerp(0f, 0.8f, progression);
+        maxTimeWithoutSeeingPlayer = Mathf.Lerp(20f, 5f, progression);
     }
 
     // Opcional: dibujar gizmos para depuración

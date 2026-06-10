@@ -6,6 +6,7 @@ public class ObjectCounter : MonoBehaviour
     public static ObjectCounter Instance;
 
     [SerializeField] private int requiredItems = 3;
+    [SerializeField] private GameObject enemy;
 
     private int collectedItems = 0;
 
@@ -21,6 +22,10 @@ public class ObjectCounter : MonoBehaviour
     {
         collectedItems++;
         Debug.Log($"Objetos recolectados: {collectedItems}/{requiredItems}");
+        if (HasEnoughItems())
+        {
+            enemy.SetActive(false);
+        }
     }
 
     public bool HasEnoughItems()

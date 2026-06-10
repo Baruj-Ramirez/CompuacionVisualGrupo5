@@ -3,11 +3,19 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour, IInteractable
 {
     [SerializeField] private string itemName = "Item";
+    private SlendermanController slenderman;
+
+    [System.Obsolete]
+    private void Start()
+    {
+        slenderman = FindFirstObjectByType<SlendermanController>();
+    }
 
     public void Interact()
     {
         Debug.Log($"[Pickup] Picked up {itemName}");
-        // TODO: add to inventory, play sound, etc.
+        slenderman.RegisterCollectedObject();
+        ObjectCounter.Instance.CollectItem();        
         gameObject.SetActive(false);
     }
 

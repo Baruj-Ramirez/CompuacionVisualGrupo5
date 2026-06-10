@@ -174,6 +174,8 @@ GameObject:
   - component: {fileID: 4886133793330263044}
   - component: {fileID: 5081878736759208147}
   - component: {fileID: 8905394870563295569}
+  - component: {fileID: 7704475334465587812}
+  - component: {fileID: 2938599784293156160}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -323,6 +325,7 @@ MonoBehaviour:
   virtualCamera: {fileID: 8095143220841568457}
   lookSensitivity: 0.1
   maxPitchAngle: 90
+  footstepsAudio: {fileID: 0}
 --- !u!143 &1461660995174349227
 CharacterController:
   m_ObjectHideFlags: 0
@@ -355,7 +358,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3119022203288590090}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -407,6 +410,52 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cameraTarget: {fileID: 7893905028847932533}
+--- !u!114 &7704475334465587812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119022203288590090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e7cac94bee61541afc45dffba4a988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlendermanDetector
+  slenderman: {fileID: 0}
+  playerCamera: {fileID: 0}
+  maxDetectionDistance: 40
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  slendermanLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isLookingAtSlenderman: 0
+  lookIntensity: 0
+--- !u!114 &2938599784293156160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119022203288590090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4712ea2c334214d4680ac54dab46cb9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SanityEffect
+  detector: {fileID: 7704475334465587812}
+  staticPanel: {fileID: 0}
+  staticNoiseImage: {fileID: 0}
+  staticAudio: {fileID: 0}
+  maxFillSpeed: 0.35
+  minFillSpeed: 0.05
+  recoverySpeed: 0.12
+  noiseScrollSpeed: 2.5
+  noiseVisibleThreshold: 0.05
+  sceneToReload: 
+  deathDelay: 1.2
 --- !u!1 &4746743660104124669
 GameObject:
   m_ObjectHideFlags: 0
