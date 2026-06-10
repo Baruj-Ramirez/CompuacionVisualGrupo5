@@ -7,8 +7,6 @@ public class PickupItem : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log($"[Pickup] Picked up {itemName}");
-
-        ObjectCounter.Instance.CollectItem();        
         // TODO: add to inventory, play sound, etc.
         gameObject.SetActive(false);
     }

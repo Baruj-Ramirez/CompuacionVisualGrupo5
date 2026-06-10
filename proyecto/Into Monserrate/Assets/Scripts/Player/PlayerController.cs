@@ -3,7 +3,6 @@ using Cinemachine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInputHandler))]
-
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -15,9 +14,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private float lookSensitivity = 0.1f;
     [SerializeField] private float maxPitchAngle   = 80f;
-
-    [Header("Audio")]
-    [SerializeField] private AudioSource footstepsAudio;
 
     private CharacterController _cc;
     private PlayerInputHandler  _input;
@@ -75,19 +71,6 @@ public class PlayerController : MonoBehaviour
         // Build move direction relative to where the character faces
         Vector3 moveDir = transform.right   * _input.MoveInput.x
                         + transform.forward * _input.MoveInput.y;
-
-        //Handles footsteps audio
-        bool isMoving = moveDir.magnitude > 0.001f;
-        if (isMoving)
-        {
-            if (!footstepsAudio.isPlaying)
-                footstepsAudio.Play();
-        }
-        else
-        {
-            if (footstepsAudio.isPlaying)
-                footstepsAudio.Stop();
-        }
 
         Vector3 velocity = moveDir * moveSpeed;
         velocity.y = _verticalVelocity;
