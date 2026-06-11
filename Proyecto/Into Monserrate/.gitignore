@@ -1,0 +1,67 @@
+# %============================================================================%
+# % Unity .gitignore template                                                  %
+# %============================================================================%
+
+# Carpetas principales generadas por Unity que NO deben ir al repositorio
+/[L]ibrary/
+/[L]ogs/
+/[U]ser[S]ettings/
+/[O]bj/
+/[B]uild/
+/[B]uilds/
+/[L]og/
+/[M]emoryCaptures/
+
+# Archivos temporales y de caché de Assets
+/[A]sset[D]ata[C]ache/
+
+# Ignorar paquetes descargados por el PackageManager (se restauran automáticamente)
+/[P]ackages/manifest-user.json
+# Si prefieres guardar las versiones exactas de los paquetes, descomenta la siguiente línea:
+# !/[P]ackages/packages-lock.json
+
+# %============================================================================%
+# % Archivos de configuración de IDEs (Visual Studio, Rider, VS Code)          %
+# %============================================================================%
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# %============================================================================%
+# % Archivos del Sistema Operativo                                             %
+# %============================================================================%
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# %============================================================================%
+# % Builds y Exportaciones (Por si acaso compilas dentro del proyecto)         %
+# %============================================================================%
+*.apk
+*.unitypackage
+*.app
