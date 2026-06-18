@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XR Immersive Scene – Three.js WebXR</title>
+</head>
+<body>
+
+  <!-- HUD: keyboard controls reference -->
+  <div id="hud">
+    <h2>XR Immersive Scene</h2>
+    <span>W / A / S / D</span> — Move<br>
+    <span>R / F</span> — Up / Down<br>
+    <span>Drag mouse</span> — Look around<br>
+    <span>Left-click object</span> — Interact<br>
+    <span>Enter VR</span> — Button below
+  </div>
+
+  <!-- Current navigation mode indicator -->
+  <div id="mode">PC Mode</div>
+
+  <!-- Crosshair at screen centre -->
+  <div id="crosshair"></div>
+
+  <!-- Shown when the crosshair hovers over an interactive object -->
+  <div id="interact-hint">Click to interact!</div>
+
+  <!-- Vite resolves this to src/main.js; Three.js is bundled from node_modules -->
+  <script type="module" src="/src/main.js"></script>
+
+</body>
+</html>

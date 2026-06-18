@@ -5,7 +5,6 @@
 - Diego Alberto Romero Olmos
 - Maicol Sebastian Olarte Ramirez
 - Jorge Isaac Alandete Díaz
-- 
 **Fecha de entrega:** 2026-06-17  
 
 ---
